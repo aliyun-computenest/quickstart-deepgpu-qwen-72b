@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>Home - Aliyun 计算巢 x quickstart-deepgpu-qwen-72b</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="search/main.js"></script>
+  
+
+  
+
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#1">1 搭建流程</a></li>
+              
+                  <li><a href="#11">1.1 找到计算巢入口</a></li>
+                  
+              
+                  <li><a href="#12">1.2 选择部署地域</a></li>
+                  
+              
+                  <li><a href="#13">1.3 选择实例</a></li>
+                  
+              
+                  <li><a href="#14-ssh">1.4 设置机器ssh登陆密码</a></li>
+                  
+              
+                  <li><a href="#15-webui">1.5 设置webui登陆密码</a></li>
+                  
+              
+                  <li><a href="#16">1.6 配置可用区</a></li>
+                  
+              
+                  <li><a href="#17">1.7 配置网络</a></li>
+                  
+              
+                  <li><a href="#18">1.8 选择模型和精度</a></li>
+                  
+              
+                  <li><a href="#19">1.9 点击“下一步：确认订单”</a></li>
+                  
+              
+                  <li><a href="#110">1.10 勾选条款并点击“立即创建”</a></li>
+                  
+              
+                  <li><a href="#111">1.11 等待服务部署完成</a></li>
+                  
+              
+          
+              <li><a href="#2">2 如何使用</a></li>
+              
+                  <li><a href="#21-webui">2.1 打开实例，找到webui入口，点击进入</a></li>
+                  
+              
+                  <li><a href="#22">2.2 输入账号密码</a></li>
+                  
+              
+                  <li><a href="#23">2.3 等待模型初始化</a></li>
+                  
+              
+                  <li><a href="#24">2.4 输入对话内容，进行对话体验</a></li>
+                  
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <p>通义千问是由阿里巴巴集团旗下的阿里云开发的聊天机器人，能够与人交互、回答问题及协作创作。 qwen-72b是国内最大的开源模型，能为用户提供超强的交互能力。</p>
+<p>deepgpu-llm是阿里云GPU云服务器专属的LLM加速套件，能够高效榨取GPU算力，提升LLM模型推理性能。阿里云客户可以免费获取和使用。</p>
+<p>本文介绍如何基于计算巢快速构建基于DeepGPU-LLM加速的qwen-72b-chat对话机器人。</p>
+<h1 id="1">1 搭建流程</h1>
+<h2 id="11">1.1 找到计算巢入口</h2>
+<p>在阿里云官网搜索“计算巢服务”，进入管理控制台，点击“服务市场”并搜索“qwen”找到服务入口（见下图）。</p>
+<p><img alt="image.png" src="1.png" /></p>
+<p>也可以点击下面链接直接进入服务。</p>
+<p><a href="https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&amp;ServiceId=service-1126a5a8f0894b1b94f8&amp;ServiceVersion=1">https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&amp;ServiceId=service-1126a5a8f0894b1b94f8&amp;ServiceVersion=1</a></p>
+<p><img alt="image.png" src="2.png" /></p>
+<h2 id="12">1.2 选择部署地域</h2>
+<p>确保有机器，如果没有机器可以更换地域。由于qwen-72b模型非常大，限定了大显存GPU机型，受限于库存因素，推荐乌兰察布、日本东京或者韩国首尔等地域。</p>
+<p><img alt="image.png" src="3.png" /></p>
+<h2 id="13">1.3 选择实例</h2>
+<p><img alt="image.png" src="4.png" /></p>
+<h2 id="14-ssh">1.4 设置机器ssh登陆密码</h2>
+<p><img alt="image.png" src="5.png" /></p>
+<h2 id="15-webui">1.5 设置webui登陆密码</h2>
+<p><img alt="image.png" src="6.png" /></p>
+<h2 id="16">1.6 配置可用区</h2>
+<p><img alt="image.png" src="7.png" /></p>
+<h2 id="17">1.7 配置网络</h2>
+<p>选择新建VPC，默认即可，无需配置。</p>
+<p><img alt="image.png" src="8.png" /></p>
+<p>如果已有VPC（VPC数量会有限制，无法无限创建），就无需新建VPC，可以直接选择已有VPC。</p>
+<p><img alt="image.png" src="9.png" /></p>
+<h2 id="18">1.8 选择模型和精度</h2>
+<p>由于显存限制，单卡GPU只能部署int8量化版本。</p>
+<p><img alt="image.png" src="10.png" /></p>
+<h2 id="19">1.9 点击“下一步：确认订单”</h2>
+<p>系统会自动校验上述参数配置，校验通过后点击下一步。</p>
+<p><img alt="image.png" src="11.png" /></p>
+<h2 id="110">1.10 勾选条款并点击“立即创建”</h2>
+<p><img alt="image.png" src="12.png" /></p>
+<h2 id="111">1.11 等待服务部署完成</h2>
+<p>大概需要5分钟～10分钟左右。</p>
+<h1 id="2">2 如何使用</h1>
+<p>部署完成后，就可以打开webui进行对话了。</p>
+<h2 id="21-webui">2.1 打开实例，找到webui入口，点击进入</h2>
+<p><img alt="image.png" src="13.png" /></p>
+<h2 id="22">2.2 输入账号密码</h2>
+<p>参见1.5节设置的账号密码</p>
+<h2 id="23">2.3 等待模型初始化</h2>
+<p>LLM模型文件较大，模型初始化需要一定时间，请耐心等待（qwen-72b-chat加载和初始化需要大约18分钟）。刷新查看是否初始化完成，若初始化完成，下方红框部分会有具体模型名称显示。</p>
+<p><img alt="image.png" src="14.png" /></p>
+<h2 id="24">2.4 输入对话内容，进行对话体验</h2>
+<p>初始化完成后，就可以进行对话了。</p>
+<p><img alt="image.png" src="15.png" /></p>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.5.3
+  Docs Build Date UTC : 2024-01-17 09:01:27.440133+00:00
+  -->
+</body>
+</html>
